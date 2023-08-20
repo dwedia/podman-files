@@ -44,8 +44,8 @@ services:
 ### Deluge ###
   deluge:
     container_name: deluge
-    network_mode: "service:gluetun"
     restart: unless-stopped
+    privileged: true
     image: linuxserver/deluge:latest
     environment:
       - PUID=1000
@@ -64,3 +64,84 @@ services:
     network:
       - container:gluetun
 
+### SabNZBd ###
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    privileged: true
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /home/ramiraz/podmnts/sabnzbd/config:/config
+      - /home/ramiraz/podmnts/media/new/Complete:/downloads #optional
+      - /home/ramiraz/podmnts/media/new/Incomplete:/incomplete-downloads #optional
+    #ports:
+    #  - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - gluetun
+    network:
+      - container:gluetun
+
+### Prowlarr ###
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    privileged: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /home/ramiraz/podmnts/prowlarr/config:/config
+    #ports:
+    #  - 9696:9696
+    restart: unless-stopped
+    depends_on:
+      - gluetun
+    network:
+      - container:gluetun
+
+### Sonarr ###
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    privileged: true
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /home/ramiraz/podmnts/sonarr/config:/config
+      - /home/ramiraz/podmnts/media/tv:/tv #optional
+      #- /path/to/downloadclient-downloads:/downloads #optional
+    #ports:
+      # - 8989:8989
+    restart: unless-stopped
+    depends_on:
+      - gluetun
+    network:
+      - container:gluetun
+
+### Radarr ###
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    privileged: true
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /home/ramiraz/podmnts/radarr/config:/config
+      - /home/ramiraz/podmnts/media/movies:/movies #optional
+      #- /path/to/downloadclient-downloads:/downloads #optional
+    #ports:
+      # - 7878:7878
+    restart: unless-stopped
+    depends_on:
+      - gluetun
+    network:
+      - container:gluetun
