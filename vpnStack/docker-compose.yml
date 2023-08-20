@@ -1,0 +1,66 @@
+---
+version: "3"
+
+networks:
+  gluetun:
+    external: true
+
+services:
+
+### gluetun ###
+  gluetun:
+    container_name: gluetun
+    image: qmcgaw/gluetun:latest
+    restart: always
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - /home/ramiraz/podmnts/gluetun/config:/gluetun:Z
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      #- OPENVPN_USER=abc <-- in the secrets file
+      #- OPENVPN_PASSWORD=abc <-- in the secrets file
+      # - SERVER_REGIONS=Switzerland
+      - SERVER_CONTRIES=Switzerland
+    env_file:
+      - secrets.txt
+    ports:
+      #- 8080:8080 # SabNZBd port
+      - 8112:8112 # Deluge port
+      - 6881:6881 # Deluge port
+      - 6881:6881/udp # Deluge port
+        #- 9117:9117 # Jackett port
+        #- 9696:9696 # Prowlarr port
+        #- 8989:8989 # Sonarr port
+        #- 7878:7878 # Radarr port
+    dns:
+      - 1.1.1.1
+    networks:
+      - gluetun
+
+### Deluge ###
+  deluge:
+    container_name: deluge
+    network_mode: "service:gluetun"
+    restart: unless-stopped
+    image: linuxserver/deluge:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Copenhagen
+      - DELUGE_LOGLEVEL=error # optional
+    volumes:
+      - /opt/dockermnts/deluge/config:/config
+      - /netmounts/new/Torrents/Complete/:/downloads
+    #ports:
+    #  - 8112:8112
+    #  - 6881:6881
+    #  - 6881:6881/udp
+    depends_on:
+      - gluetun
+    network:
+      - container:gluetun
+
