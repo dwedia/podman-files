@@ -47,7 +47,6 @@ services:
     network_mode: "service:gluetun"
     restart: unless-stopped
     image: linuxserver/deluge:latest
-    privileged: true
     environment:
       - PUID=1000
       - PGID=1000
