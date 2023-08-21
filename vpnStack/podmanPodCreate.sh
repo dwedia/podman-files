@@ -48,6 +48,7 @@ podman run -d --name gluetun --pod vpnStack --restart unless-stopped --privilege
 # -v /home/ramiraz/podmnts/media/new/Torrents/Complete/:/downloads:z ### maps the downloads path in to the container, and sets SELinux context
 # -v /home/ramiraz/podmnts/media/new/Torrents/Incomplete/:/Incomplete:z ### maps the incomplete path in to the container, and sets SELinux context
 # --requires gluetun ### tells podman that this container cannot run unless gluetun container is running
+# --network container:gluetun ### Sends this containers network trafic through the gluetun container
 # linuxserver/deluge:latest ### the image used to create the container
 
 podman run -d --name deluge --pod vpnStack --restart unless-stopped \
@@ -59,6 +60,7 @@ podman run -d --name deluge --pod vpnStack --restart unless-stopped \
  -v /home/ramiraz/podmnts/media/new/Torrents/Complete/:/downloads:z \
  -v /home/ramiraz/podmnts/media/new/Torrents/Incomplete/:/Incomplete:z \
  --requires gluetun \
+ --network container:gluetun \
  linuxserver/deluge:latest
 
 
