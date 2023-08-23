@@ -121,6 +121,14 @@ then
   
 else
   echo "Requires folders are not present"
+  if [[ ! -d /opt/podmnts ]];
+  then
+    echo "Please create /opt/podmnts"
+  fi
+  if [[ ! -d /opt/netmounts ]];
+  then
+    echo "Please create /opt/netmounts"
+  fi
 fi
 
 
