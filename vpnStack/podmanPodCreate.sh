@@ -19,7 +19,7 @@ then
   # --share net ### tells the pod that containers inside should share network namespace
   # -p 8112:8112 -p 6881:6881 -p 6881:6881/udp ### exposes the ports needed by containers in the pod
   
-  podman pod create --name vpnStack --share net -p 8112:8112 -p 6881:6881 -p 6881:6881/udp -p 8080:8080 -p 9696:9696 -p 8989:8989
+  podman pod create --name vpnStack --share net -p 8112:8112 -p 6881:6881 -p 6881:6881/udp -p 8080:8080 -p 9696:9696 -p 8989:8989 -p 7878:7878
   
   ## Commands to manage the pod ##
   # podman pod start vpnStack ### Start the pod
