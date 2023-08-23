@@ -28,7 +28,7 @@ then
   
 
   # create folder for gluetun config
-  mkdir -p /opt/podmnts/gluetun
+  mkdir -p /opt/podmnts/gluetun/config
 
   # create gluetun container, and put it in the pod
   # Options:
@@ -57,7 +57,7 @@ then
   
 
   # create folder for deluge config
-  mkdir -p /opt/podmnts/deluge
+  mkdir -p /opt/podmnts/deluge/config
 
   # create deluge container, and put it in the pod
   # Options:
@@ -90,7 +90,7 @@ then
   
 
   # create folder for sabnzbd config
-  mkdir -p /opt/podmnts/sabnzbd
+  mkdir -p /opt/podmnts/sabnzbd/config
 
   # Create SabNZBd container
   podman run -d --name sabnzbd --pod vpnStack --restart unless-stopped \
@@ -105,7 +105,7 @@ then
   
 
   # create folder for prowlarr config
-  mkdir -p /opt/podmnts/prowlarr
+  mkdir -p /opt/podmnts/prowlarr/config
 
   # Create Prowlarr container
   podman run -d --name prowlarr --pod vpnStack --restart unless-stopped \
@@ -117,7 +117,7 @@ then
    --network container:gluetun \
   
   # create folder for sonarr config
-  mkdir -p /opt/podmnts/sonarr
+  mkdir -p /opt/podmnts/sonarr/config
 
   # Create Sonarr container
   podman run -d --name sonarr --pod vpnStack --restart unless-stopped \
@@ -130,7 +130,7 @@ then
    --network container:gluetun \
   
   # create folder for radarr config
-  mkdir -p /opt/podmnts/radarr
+  mkdir -p /opt/podmnts/radarr/config
 
   # Create Radarr container
   podman run -d --name radarr --pod vpnStack --restart unless-stopped \
