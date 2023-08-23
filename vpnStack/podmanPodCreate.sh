@@ -102,6 +102,7 @@ then
    -v /opt/netmounts/new/Incomplete:/incomplete-downloads:Z \
    --requires gluetun \
    --network container:gluetun \
+   lscr.io/linuxserver/sabnzbd:latest
   
 
   # create folder for prowlarr config
@@ -115,6 +116,7 @@ then
    -v /opt/podmnts/prowlarr/config:/config:Z \
    --requires gluetun \
    --network container:gluetun \
+   lscr.io/linuxserver/prowlarr:latest
   
   # create folder for sonarr config
   mkdir -p /opt/podmnts/sonarr/config
@@ -128,6 +130,7 @@ then
    -v /opt/netmounts/tv:/tv:/tv:z \
    --requires gluetun \
    --network container:gluetun \
+   lscr.io/linuxserver/sonarr:latest
   
   # create folder for radarr config
   mkdir -p /opt/podmnts/radarr/config
@@ -141,6 +144,7 @@ then
    -v /opt/netmounts/tv:/movies:/movies:z \
    --requires gluetun \
    --network container:gluetun \
+   lscr.io/linuxserver/radarr:latest
   
 else
   echo "Requires folders are not present"
