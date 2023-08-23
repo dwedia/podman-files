@@ -26,6 +26,10 @@ then
   # podman pod stop vpnStack ### stops the pod
   # podman pod rm vpnStack ### removes the pod
   
+
+  # create folder for gluetun config
+  mkdir -p /opt/podmnts/gluetun
+
   # create gluetun container, and put it in the pod
   # Options:
   # -d ### detached - Run container in background and print container ID
@@ -42,6 +46,7 @@ then
   # --dns 1.1.1.1 ### Set custom DNS servers
   # qmcgaw/gluetun:latest ### the image used to create the container
   
+
   podman run -d --name gluetun --pod vpnStack --restart unless-stopped --privileged --cap-add NET_ADMIN --device /dev/net/tun:/dev/net/tun \
    -v /opt/podmnts/gluetun/config:/gluetun:Z \
    -e VPN_SERVICE_PROVIDER=nordvpn \
@@ -50,6 +55,10 @@ then
    --dns 1.1.1.1 \
    qmcgaw/gluetun:latest
   
+
+  # create folder for deluge config
+  mkdir -p /opt/podmnts/deluge
+
   # create deluge container, and put it in the pod
   # Options:
   # -d ### detached - Run container in background and print container ID
@@ -66,7 +75,7 @@ then
   # --requires gluetun ### tells podman that this container cannot run unless gluetun container is running
   # --network container:gluetun ### Sends this containers network trafic through the gluetun container
   # linuxserver/deluge:latest ### the image used to create the container
-  
+
   podman run -d --name deluge --pod vpnStack --restart unless-stopped \
    -e PUID=1000 \
    -e PGID=1000 \
@@ -79,6 +88,10 @@ then
    --network container:gluetun \
    linuxserver/deluge:latest
   
+
+  # create folder for sabnzbd config
+  mkdir -p /opt/podmnts/sabnzbd
+
   # Create SabNZBd container
   podman run -d --name sabnzbd --pod vpnStack --restart unless-stopped \
    -e PUID=1000 \
@@ -90,6 +103,10 @@ then
    --requires gluetun \
    --network container:gluetun \
   
+
+  # create folder for prowlarr config
+  mkdir -p /opt/podmnts/prowlarr
+
   # Create Prowlarr container
   podman run -d --name prowlarr --pod vpnStack --restart unless-stopped \
    -e PUID=1000 \
@@ -99,6 +116,9 @@ then
    --requires gluetun \
    --network container:gluetun \
   
+  # create folder for sonarr config
+  mkdir -p /opt/podmnts/sonarr
+
   # Create Sonarr container
   podman run -d --name sonarr --pod vpnStack --restart unless-stopped \
    -e PUID=1000 \
@@ -109,6 +129,9 @@ then
    --requires gluetun \
    --network container:gluetun \
   
+  # create folder for radarr config
+  mkdir -p /opt/podmnts/radarr
+
   # Create Radarr container
   podman run -d --name radarr --pod vpnStack --restart unless-stopped \
    -e PUID=1000 \
