@@ -127,7 +127,7 @@ then
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
    -v /opt/podmnts/sonarr/config:/config:Z \
-   -v /opt/netmounts/tv:/tv:/tv:Z \
+   -v /opt/netmounts/tv:/tv:z \
    --requires gluetun \
    --network container:gluetun \
    lscr.io/linuxserver/sonarr:latest
@@ -141,7 +141,7 @@ then
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
    -v /opt/podmnts/radarr/config:/config:Z \
-   -v /opt/netmounts/tv:/movies:/movies:Z \
+   -v /opt/netmounts/movies:/movies:z \
    --requires gluetun \
    --network container:gluetun \
    lscr.io/linuxserver/radarr:latest
