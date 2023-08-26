@@ -82,8 +82,8 @@ then
    -e TZ=Europe/Copenhagen \
    -e DELUGE_LOGLEVEL=error \
    -v /opt/podmnts/deluge/config:/config:Z \
-   -v /opt/netmounts/new/Torrents/Complete/:/downloads:z \
-   -v /opt/netmounts/new/Torrents/Incomplete/:/Incomplete:z \
+   -v /opt/netmounts/new/Torrents/Complete/:/downloads \
+   -v /opt/netmounts/new/Torrents/Incomplete/:/Incomplete \
    --requires gluetun \
    --network container:gluetun \
    linuxserver/deluge:latest
@@ -98,8 +98,8 @@ then
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
    -v /opt/podmnts/sabnzbd/config:/config:Z \
-   -v /opt/netmounts/new/Complete:/downloads:Z \
-   -v /opt/netmounts/new/Incomplete:/incomplete-downloads:Z \
+   -v /opt/netmounts/new/Complete:/downloads \
+   -v /opt/netmounts/new/Incomplete:/incomplete-downloads \
    --requires gluetun \
    --network container:gluetun \
    lscr.io/linuxserver/sabnzbd:latest
@@ -127,7 +127,7 @@ then
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
    -v /opt/podmnts/sonarr/config:/config:Z \
-   -v /opt/netmounts/tv:/tv:z \
+   -v /opt/netmounts/tv:/tv \
    --requires gluetun \
    --network container:gluetun \
    lscr.io/linuxserver/sonarr:latest
@@ -141,7 +141,7 @@ then
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
    -v /opt/podmnts/radarr/config:/config:Z \
-   -v /opt/netmounts/movies:/movies:z \
+   -v /opt/netmounts/movies:/movies \
    --requires gluetun \
    --network container:gluetun \
    lscr.io/linuxserver/radarr:latest
