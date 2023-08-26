@@ -47,7 +47,7 @@ then
   # qmcgaw/gluetun:latest ### the image used to create the container
   
 
-  podman run -d --name gluetun --pod vpnStack --restart unless-stopped --privileged --cap-add NET_ADMIN --device /dev/net/tun:/dev/net/tun \
+  podman run -d --name gluetun --pod vpnStack --privileged --cap-add NET_ADMIN --device /dev/net/tun:/dev/net/tun \
    -v /opt/podmnts/gluetun/config:/gluetun:Z \
    -e VPN_SERVICE_PROVIDER=nordvpn \
    -e SERVER_CONTRIES=Switzerland \
@@ -76,7 +76,7 @@ then
   # --network container:gluetun ### Sends this containers network trafic through the gluetun container
   # linuxserver/deluge:latest ### the image used to create the container
 
-  podman run -d --name deluge --pod vpnStack --restart unless-stopped \
+  podman run -d --name deluge --pod vpnStack \
    -e PUID=1000 \
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
@@ -93,7 +93,7 @@ then
   mkdir -p /opt/podmnts/sabnzbd/config
 
   # Create SabNZBd container
-  podman run -d --name sabnzbd --pod vpnStack --restart unless-stopped \
+  podman run -d --name sabnzbd --pod vpnStack \
    -e PUID=1000 \
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
@@ -109,7 +109,7 @@ then
   mkdir -p /opt/podmnts/prowlarr/config
 
   # Create Prowlarr container
-  podman run -d --name prowlarr --pod vpnStack --restart unless-stopped \
+  podman run -d --name prowlarr --pod vpnStack \
    -e PUID=1000 \
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
@@ -122,7 +122,7 @@ then
   mkdir -p /opt/podmnts/sonarr/config
 
   # Create Sonarr container
-  podman run -d --name sonarr --pod vpnStack --restart unless-stopped \
+  podman run -d --name sonarr --pod vpnStack \
    -e PUID=1000 \
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
@@ -136,7 +136,7 @@ then
   mkdir -p /opt/podmnts/radarr/config
 
   # Create Radarr container
-  podman run -d --name radarr --pod vpnStack --restart unless-stopped \
+  podman run -d --name radarr --pod vpnStack \
    -e PUID=1000 \
    -e PGID=1000 \
    -e TZ=Europe/Copenhagen \
