@@ -32,9 +32,6 @@ spec:
       hostPort: 80
     - containerPort: 443
       hostPort: 443
-    securityContext:
-      seLinuxOptions:
-        type: spc_t
     volumeMounts:
     - mountPath: /config
       name: opt-podmnts-heimdall-config-host-0
