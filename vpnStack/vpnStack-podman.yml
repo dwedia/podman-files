@@ -22,9 +22,9 @@ spec:
     - name: SERVER_CONTRIES
       value: Switzerland
     - name: OPENVPN_PASSWORD
-      value: 68yR38u8Mp36yAez82YLAZEd
+      value: -
     - name: OPENVPN_USER
-      value: Te8q8QGGsF8XCQwWKcFzd3Kd
+      value: -
     - name: VPN_SERVICE_PROVIDER
       value: nordvpn
     image: docker.io/qmcgaw/gluetun:latest
