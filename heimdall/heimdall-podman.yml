@@ -1,0 +1,46 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.4.1
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    bind-mount-options: /opt/podmnts/heimdall/config:Z
+  creationTimestamp: "2023-08-27T17:51:46Z"
+  labels:
+    app: heimdall-pod
+  name: heimdall-pod
+spec:
+  containers:
+  - env:
+    - name: TZ
+      value: Europe/Copenhagen
+    - name: PUID
+      value: "1000"
+    - name: PGID
+      value: "1000"
+    image: lscr.io/linuxserver/heimdall:latest
+    name: heimdall
+    ports:
+    - containerPort: 80
+      hostPort: 80
+    - containerPort: 443
+      hostPort: 443
+    securityContext:
+      seLinuxOptions:
+        type: spc_t
+    volumeMounts:
+    - mountPath: /config
+      name: opt-podmnts-heimdall-config-host-0
+  volumes:
+  - hostPath:
+      path: /opt/podmnts/heimdall/config
+      type: Directory
+    name: opt-podmnts-heimdall-config-host-0
+
