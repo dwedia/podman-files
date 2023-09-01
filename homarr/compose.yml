@@ -1,0 +1,11 @@
+---
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /opt/podmnts/homarr/configs:/app/data/configs:Z
+      - /opt/podmnts/homarr/icons:/app/public/icons:Z
+    ports:
+      - '7575:7575'
