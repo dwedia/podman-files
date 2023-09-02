@@ -23,4 +23,4 @@ services:
       RECIPE_DISABLE_AMOUNT: 'false'
 
     volumes:
-      - /opt/podmnts/mealie/:/app/data
+      - /opt/podmnts/mealie/:/app/data:Z
