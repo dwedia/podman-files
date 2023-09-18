@@ -20,6 +20,14 @@ services:
       - TZ=Europe/Copenhagen
       - DELUGE_LOGLEVEL=error
     env_file: secrets.txt
+    ports:
+      - 8112:8112
+      - 6881:6881/udp
+      - 6881:6881
+      - 8080:8080
+      - 9696:9696
+      - 8989:8989
+      - 7878:7878
     dns:
       - 1.1.1.1
 
