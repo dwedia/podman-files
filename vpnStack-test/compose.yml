@@ -4,7 +4,7 @@ version: "3.9"
 services:
   gluetun:
     image: qmcgaw/gluetun:latest
-    container_name: gluetun
+    container_name: gluetun-test
     restart: unless-stopped
     privileged: true
     cap_add:
@@ -29,7 +29,7 @@ services:
 
   deluge:
     image: linuxserver/deluge:latest
-    container_name: deluge
+    container_name: deluge-test
     restart: unless-stopped
     environment:
       - PUID=1000
