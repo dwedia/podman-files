@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vpn-stack
+
+spec:
+  env:
+  - name: USER_NAME
+    value: ramiraz
+  - name: USER_UID
+    value: 1000
+
+  containers:
+
+  - name: gluetun
+    image: docker.io/qmcgaw/gluetun:latest
+    securityContext:
+      privileged: true
+      SELinuxOptions:
+        user: root
+    VolumeMounts:
+    - name: gluetun-config
+      mountPath: /gluetun/config:Z
+
+  - name: deluge
+    image: docker.io/linuxserver/deluge:latest
+    securityContext:
+      runAsUser: $USER_UID
+      SELinuxOptions:
+        user: $USER_NAME
+    volumeMounts:
+    - name: deluge-config:Z
+      mountPath: /config
+    - name: deluge-downloads
+      mountPath: /downloads
+    - name: deluge-incomplete
+      mountPath: /incomplete
+
+  - name: sabnzbd
+    image: lscr.io/linuxserver/sabnzbd:latest
+    securityContext:
+      runAsUser: $USER_UID
+      SELinuxOptions:
+        user: $USER_NAME
+    volumeMounts:
+    - name: sabnzbd-config:Z
+      mountPath: /config
+    - name: sabnzbd-downloads
+      mountPath: /downloads
+    - name: sabnzbd-incomplete
+      mountPath: /incomplete-downloads
+
+  - name: Prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
+    securityContext:
+      runAsUser: $USER_UID
+      SELinuxOptions:
+        user: $USER_NAME
+    volumeMounts:
+    - name: prowlarr-config:Z
+      mountPath: /config
+
+  - name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    securityContext:
+      runAsUser: $USER_UID
+      SELinuxOptions:
+        user: $USER_NAME
+    volumeMounts:
+    - name: sonarr-config:Z
+      mountPath: /config
+    - name: sonarr-tv
+      mountPath: /tv
+
+  - name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    securityContext:
+      runAsUser: $USER_UID
+      SELinuxOptions:
+        user: $USER_NAME
+    volumeMounts:
+    - name: radarr-config:Z
+      mountPath: /config
+    - name: radarr-movies
+      mountPath: /movies
+
+  volumes:
+
+  # gluetun volumes
+  - name: gluetun-config
+    bindMount:
+      path: /opt/podmnts/gluetun/config
+      type: Directory
+
+  # deluge volumes
+  - name: deluge-config
+    bindMount:
+      path: /opt/podmnts/deluge/config
+      type: Directory
+  - name: deluge-downloads
+    bindMount:
+      path: /opt/netmounts/new/Torrents/Complete
+      type: Directory
+  - name: deluge-incomplete
+    bindMount:
+      path: /opt/netmounts/new/Torrents/Incomplete/
+      type: Directory
+
+  # SabNZBd volumes
+  - name: sabnzbd-config
+    bindMount:
+      path: /opt/podmnts/sabnzbd/config
+      type: Directory
+  - name: sabnzbd-downloads
+    bindMount:
+      path: /opt/netmounts/new/Complete
+      type: Directory
+  - name: sabnzbd-incomplete
+    bindMount:
+      path: /opt/netmounts/new/Incomplete
+      type: Directory
+
+  # Prowlarr volumes
+  - name: prowlarr-config
+    bindMount:
+      path: /opt/podmnts/prowlarr/config
+      type: Directory
+
+  # Sonarr volumes
+  - name: sonarr-config
+    bindMount:
+      path: /opt/podmnts/sonarr/config
+      type: Directory
+  - name: sonarr-tv
+    bindMount:
+      path: /opt/netmounts/tv
+      type: Directory
+
+  # Radarr Volumes
+  - name: radarr-config
+    bindMount:
+      path: /opt/podmnts/radarr/config
+      type: Directory
+  - name: radarr-movies
+    bindMount:
+      path: /opt/netmounts/movies
+      type: Directory

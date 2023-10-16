@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <description>Deluge</description>
+  <port port="8112" protocol="tcp"/>
+  <port port="6881" protocol="tcp"/>
+  <port port="6881" protocol="udp"/>
+</service>
