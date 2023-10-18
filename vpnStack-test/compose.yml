@@ -42,10 +42,6 @@ services:
       - /opt/netmounts/new/Torrents/Incomplete/:/Incomplete
     depends_on:
       - gluetun
-    ports:
-#      - 8112:8112
-#      - 6881:6881/udp
-#      - 6881:6881
     network:
       container: gluetun
 
