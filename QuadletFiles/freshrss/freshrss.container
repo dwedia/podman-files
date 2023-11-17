@@ -1,0 +1,17 @@
+[Unit]
+Description=Oneline description goes here
+
+[Container]
+Image=lscr.io/linuxserver/freshrss:latest
+ContainerName=FreshRSS
+PublishPort=8070:80
+User=1000
+Group=1000
+Volume=/opt/podmnts/freshrss/config:/config:Z
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target
