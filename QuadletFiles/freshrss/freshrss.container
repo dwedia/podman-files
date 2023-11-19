@@ -1,5 +1,5 @@
 [Unit]
-Description=Oneline description goes here
+Description=FreshRSS Quadlet
 
 [Container]
 Image=lscr.io/linuxserver/freshrss:latest
