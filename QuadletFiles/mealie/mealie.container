@@ -2,7 +2,7 @@
 Description=Mealie Quadlet
 
 [Container]
-Image=hkotel/mealie:latest
+Image=docker.io/hkotel/mealie:latest
 ContainerName=Mealie
 PublishPort=9925:80
 User=1000
