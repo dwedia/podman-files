@@ -5,9 +5,10 @@ Description=FreshRSS Quadlet
 Image=lscr.io/linuxserver/freshrss:latest
 ContainerName=FreshRSS
 PublishPort=8070:80
-User=1000
-Group=1000
+User=root
+Group=root
 Volume=/opt/podmnts/freshrss/config:/config:Z
+Environment=Timezone=Europe/Copenhagen
 
 [Service]
 Restart=always
