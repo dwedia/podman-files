@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
-      - TZ=${TZ}
+      - TZ=Europe/Copenhagen
     volumes:
       - /opt/podmnts/freshrss/config:/config:Z
     ports:
