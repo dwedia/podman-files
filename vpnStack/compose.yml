@@ -5,7 +5,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     privileged: true
     cap_add:
@@ -34,7 +34,7 @@ services:
   deluge:
     image: linuxserver/deluge:latest
     container_name: deluge
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -56,7 +56,7 @@ services:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -73,7 +73,7 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -88,7 +88,7 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -104,7 +104,7 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    pod: vpnStack
+    #pod: vpnStack
     restart: unless-stopped
     environment:
       - PUID=1000
