@@ -10,7 +10,7 @@ services:
     cap_add:
       - NET_ADMIN
     device:
-      - /dev/net/tun:/dev/net/tun
+      - /dev/net/tun:/dev/net/tun:z
     volumes:
       - /opt/podmnts/gluetun/config:/gluetun:Z
     environment:
