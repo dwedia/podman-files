@@ -42,6 +42,5 @@ services:
       - /opt/podmnts/deluge/new/Torrents/Incomplete/:/Incomplete
     depends_on:
       - gluetun
-    network_mode:
-      container: gluetun-test
+    network_mode: "container:gluetun-test"
 
