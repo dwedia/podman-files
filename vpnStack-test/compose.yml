@@ -6,7 +6,7 @@ services:
     image: qmcgaw/gluetun:latest
     container_name: gluetun-test
     restart: unless-stopped
-    privileged: true
+    privileged: false
     cap_add:
       - NET_ADMIN
     device:
