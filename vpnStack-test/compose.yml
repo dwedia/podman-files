@@ -9,8 +9,6 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-      - NET_RAW
-      - SYS_MODULE
     device:
       - /dev/net/tun:/dev/net/tun
     volumes:
@@ -45,5 +43,5 @@ services:
     depends_on:
       - gluetun
     network:
-      container: gluetun
+      container: gluetun-test
 
