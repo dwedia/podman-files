@@ -9,6 +9,7 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
+      - SYS_ADMIN
     device:
       - /dev/net/tun:/dev/net/tun
     volumes:
