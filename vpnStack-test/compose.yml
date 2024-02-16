@@ -9,9 +9,8 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-      - SYS_MODULE
     device:
-      - /dev/net/tun:/dev/net/tun
+      - /dev/net/tun
     volumes:
       - /opt/podmnts/gluetun/config:/gluetun:Z
     environment:
