@@ -6,11 +6,11 @@ services:
     image: qmcgaw/gluetun:latest
     container_name: gluetun-test
     restart: unless-stopped
-    privileged: false
+    privileged: true
     cap_add:
       - NET_ADMIN
     device:
-      - /dev/net/tun:/dev/net/tun:z
+      - /dev/net/tun:/dev/net/tun
     volumes:
       - /opt/podmnts/gluetun/config:/gluetun:Z
     environment:
