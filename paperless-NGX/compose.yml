@@ -1,0 +1,61 @@
+---
+version: "3.9"
+
+services:
+  broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - /opt/podmnts/paperless-ngx/redisdata:/data:Z
+
+  db:
+    image: docker.io/library/postgres:16
+    restart: unless-stopped
+    volumes:
+      - /opt/podmnts/paperless-ngx/pgdata:/var/lib/postgresql/data:Z
+    env_file: secrets.env
+    environment:
+      POSTGRES_DB: paperless
+#      POSTGRES_USER: paperless # in env file
+#      POSTGRES_PASSWORD: paperless # in env file
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+      - broker
+      - gotenberg
+      - tika
+    ports:
+      - "9000:8000"
+    volumes:
+      - /opt/podmnts/paperless-ngx/data:/usr/src/paperless/data:Z
+      - /opt/podmnts/paperless-ngx/media:/usr/src/paperless/media:Z
+      - /opt/podmnts/paperless-ngx/export:/usr/src/paperless/export:Z
+      - /opt/podmnts/paperless-ngx/consume:/usr/src/paperless/consume:Z
+    env_file: secrets.env
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_DBENGINE: postgres
+#      PAPERLESS_DBUSER: paperless # only needed if non-default username
+#      PAPERLESS_DBPASS: paperless # only needed if non-default password
+  
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.7
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    
+  tika:
+    image: docker.io/apache/tika:latest
+    restart: unless-stopped
+
