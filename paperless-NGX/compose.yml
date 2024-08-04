@@ -42,6 +42,9 @@ services:
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
       PAPERLESS_DBENGINE: postgres
+      PAPERLESS_TIME_ZONE: Europe/Copenhagen
+      PAPERLESS_OCR_LANGUAGE: dan
+      PAPERLESS_OCR_MODE: skip
 #      PAPERLESS_DBUSER: paperless # only needed if non-default username
 #      PAPERLESS_DBPASS: paperless # only needed if non-default password
   
