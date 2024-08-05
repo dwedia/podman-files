@@ -33,7 +33,7 @@ services:
       - /opt/podmnts/paperless-ngx/data:/usr/src/paperless/data:Z
       - /opt/podmnts/paperless-ngx/media:/usr/src/paperless/media:Z
       - /opt/podmnts/paperless-ngx/export:/usr/src/paperless/export:Z
-      - /opt/netmounts/paperlessDocs/consume:/usr/src/paperless/consume:Z
+      - /opt/netmounts/paperlessDocs/consume:/usr/src/paperless/consume
     env_file: secrets.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
