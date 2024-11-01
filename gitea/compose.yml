@@ -1,7 +1,5 @@
 ---
 
-version: "2"
-
 networks:
   gitea:
     external: true
