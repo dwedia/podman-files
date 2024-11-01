@@ -16,7 +16,7 @@ services:
     restart: always
     volumes:
       - /opt/gitea/data:/var/lib/gitea:Z
-      - /opt/gitea/config:/etc/gitea:Z
+      - /opt/gitea/config:/data/gitea/conf:Z
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
