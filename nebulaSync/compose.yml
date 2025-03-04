@@ -8,3 +8,4 @@ services:
     - REPLICAS=http://ph2.example.com|password,http://ph3.example.com|password
     - FULL_SYNC=true
     - CRON=0 * * * *
+    - CLIENT_SKIP_TLS_VERIFICATION=true
